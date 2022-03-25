@@ -1,0 +1,71 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Proyecto.master.cs" Inherits="InterfazWeb.Proyecto" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/Estilos.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+        function mostrarMensaje(mensaje) {
+            alert(mensaje);
+        }
+    </script>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <nav id="Navegacion" class="navbar navbar-expand-lg navbar-light bg-blue">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Instituto de Idiomas</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="FrmInicio.aspx">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="FrmEstudiantes.aspx">Estudiantes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="FrmProfesores.aspx">Profesores</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="FrmMatricula.aspx">Matriculas</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="FrmModificarNotas.aspx">Modificar Notas</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="FrmCatalogoElementos.aspx">Programas</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="FrmProgramarClase.aspx">Programar Clase</a>
+          </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <main>
+        <form id="form1" runat="server">
+            <div>
+                <asp:ContentPlaceHolder ID="Main" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </form>
+    </main>
+        
+    <footer>
+        <div>
+                <asp:ContentPlaceHolder ID="Footer" runat="server">
+                </asp:ContentPlaceHolder>
+        </div>
+    </footer>
+</body>
+</html>

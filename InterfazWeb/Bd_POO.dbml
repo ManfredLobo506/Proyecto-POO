@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PROYECTO_POO" Class="Bd_POODataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-MTU784K\SQLEXPRESS;Initial Catalog=PROYECTO_POO;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="PROYECTO_POOConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.CERTIFICADOS_PROFESORES" Member="CERTIFICADOS_PROFESORES">
+    <Type Name="CERTIFICADOS_PROFESORES">
+      <Column Name="COD_CERTIFICADO" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDENTIFICACION_P" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="NOMBRE_CERTIFICADO" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="PROFESORES_CERTIFICADOS_PROFESORES" Member="PROFESORES" ThisKey="IDENTIFICACION_P" OtherKey="IDENTIFICACION_P" Type="PROFESORES" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DETALLE_MATRICULA" Member="DETALLE_MATRICULA">
+    <Type Name="DETALLE_MATRICULA">
+      <Column Name="ID_DETALLEMATRICULA" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_MATRICULA" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="COD_MATERIA_ABIERTA" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="NOTA" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CANCELADO" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="MATERIAS_ABIERTAS_DETALLE_MATRICULA" Member="MATERIAS_ABIERTAS" ThisKey="COD_MATERIA_ABIERTA" OtherKey="COD_MATERIA_ABIERTA" Type="MATERIAS_ABIERTAS" IsForeignKey="true" />
+      <Association Name="MATRICULAS_DETALLE_MATRICULA" Member="MATRICULAS" ThisKey="ID_MATRICULA" OtherKey="ID_MATRICULA" Type="MATRICULAS" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DIAS_FERIADOS" Member="DIAS_FERIADOS">
+    <Type Name="DIAS_FERIADOS">
+      <Column Name="FECHA" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="MOTIVO" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ESTUDIANTES" Member="ESTUDIANTES">
+    <Type Name="ESTUDIANTES">
+      <Column Name="cod_Est" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IDENTIFICACION_E" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NOMBRE_E" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="APELLIDO1_E" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="APELLIDO2_E" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CORREO_ELECTRONICO_E" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NUMERO_TELEFONICO" Type="System.String" DbType="VarChar(11) NOT NULL" CanBeNull="false" />
+      <Association Name="ESTUDIANTES_MATRICULAS" Member="MATRICULAS" ThisKey="IDENTIFICACION_E" OtherKey="ID_ESTUDIANTE" Type="MATRICULAS" />
+      <Association Name="ESTUDIANTES_PROGRAMAR_CLASE" Member="PROGRAMAR_CLASE" ThisKey="IDENTIFICACION_E" OtherKey="ID_ESTUDIANTE" Type="PROGRAMAR_CLASE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HORARIO_P" Member="HORARIO_P">
+    <Type Name="HORARIO_P">
+      <Column Name="ID_HORARIO" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IDENTIFICACION_P" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="DIA" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="HORA_ENTRADA" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="HORA_SALIDA" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Association Name="PROFESORES_HORARIO_P" Member="PROFESORES" ThisKey="IDENTIFICACION_P" OtherKey="IDENTIFICACION_P" Type="PROFESORES" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MATERIAS" Member="MATERIAS">
+    <Type Name="MATERIAS">
+      <Column Name="COD_MATERIA" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NOMBRE_MATERIA" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TOTAL_HORAS_MATERIA" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MATERIAS_MATERIAS_ABIERTAS" Member="MATERIAS_ABIERTAS" ThisKey="COD_MATERIA" OtherKey="COD_MATERIA" Type="MATERIAS_ABIERTAS" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MATERIAS_ABIERTAS" Member="MATERIAS_ABIERTAS">
+    <Type Name="MATERIAS_ABIERTAS">
+      <Column Name="COD_MATERIA_ABIERTA" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="COD_MATERIA" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="IDENTIFICACION_P" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="CUPO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="COSTO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MATERIAS_ABIERTAS_DETALLE_MATRICULA" Member="DETALLE_MATRICULA" ThisKey="COD_MATERIA_ABIERTA" OtherKey="COD_MATERIA_ABIERTA" Type="DETALLE_MATRICULA" />
+      <Association Name="MATERIAS_ABIERTAS_PROGRAMAR_CLASE" Member="PROGRAMAR_CLASE" ThisKey="COD_MATERIA_ABIERTA" OtherKey="COD_MATERIA_ABIERTA" Type="PROGRAMAR_CLASE" />
+      <Association Name="MATERIAS_MATERIAS_ABIERTAS" Member="MATERIAS" ThisKey="COD_MATERIA" OtherKey="COD_MATERIA" Type="MATERIAS" IsForeignKey="true" />
+      <Association Name="PROFESORES_MATERIAS_ABIERTAS" Member="PROFESORES" ThisKey="IDENTIFICACION_P" OtherKey="IDENTIFICACION_P" Type="PROFESORES" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MATRICULAS" Member="MATRICULAS">
+    <Type Name="MATRICULAS">
+      <Column Name="ID_MATRICULA" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_ESTUDIANTE" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="FECHA" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ENCARGADO" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Association Name="MATRICULAS_DETALLE_MATRICULA" Member="DETALLE_MATRICULA" ThisKey="ID_MATRICULA" OtherKey="ID_MATRICULA" Type="DETALLE_MATRICULA" />
+      <Association Name="ESTUDIANTES_MATRICULAS" Member="ESTUDIANTES" ThisKey="ID_ESTUDIANTE" OtherKey="IDENTIFICACION_E" Type="ESTUDIANTES" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PROFESORES" Member="PROFESORES">
+    <Type Name="PROFESORES">
+      <Column Name="IDENTIFICACION_P" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NOMBRE_P" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="APELLIDO1_P" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="APELLIDO2_P" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CORREO_ELECTRONICO_P" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NUMERO_TELEFONICO_P" Type="System.String" DbType="VarChar(11) NOT NULL" CanBeNull="false" />
+      <Association Name="PROFESORES_CERTIFICADOS_PROFESORES" Member="CERTIFICADOS_PROFESORES" ThisKey="IDENTIFICACION_P" OtherKey="IDENTIFICACION_P" Type="CERTIFICADOS_PROFESORES" />
+      <Association Name="PROFESORES_HORARIO_P" Member="HORARIO_P" ThisKey="IDENTIFICACION_P" OtherKey="IDENTIFICACION_P" Type="HORARIO_P" />
+      <Association Name="PROFESORES_MATERIAS_ABIERTAS" Member="MATERIAS_ABIERTAS" ThisKey="IDENTIFICACION_P" OtherKey="IDENTIFICACION_P" Type="MATERIAS_ABIERTAS" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PROGRAMAR_CLASE" Member="PROGRAMAR_CLASE">
+    <Type Name="PROGRAMAR_CLASE">
+      <Column Name="ID_CLASE" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_ESTUDIANTE" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="COD_MATERIA_ABIERTA" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="DIA" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="HORA" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Association Name="MATERIAS_ABIERTAS_PROGRAMAR_CLASE" Member="MATERIAS_ABIERTAS" ThisKey="COD_MATERIA_ABIERTA" OtherKey="COD_MATERIA_ABIERTA" Type="MATERIAS_ABIERTAS" IsForeignKey="true" />
+      <Association Name="ESTUDIANTES_PROGRAMAR_CLASE" Member="ESTUDIANTES" ThisKey="ID_ESTUDIANTE" OtherKey="IDENTIFICACION_E" Type="ESTUDIANTES" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.USUARIOS" Member="USUARIOS">
+    <Type Name="USUARIOS">
+      <Column Name="ID_USER" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOMBRE_USER" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CONTRA" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PERMISO" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.REVISAR_DISPONIBILIDAD" Method="REVISAR_DISPONIBILIDAD">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="dia" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="hora" Type="System.TimeSpan" DbType="Time" />
+    <Parameter Name="fecha" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.HORARIO_PROFESOR_VERFICACIONES" Method="HORARIO_PROFESOR_VERFICACIONES">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="HORA_ENTRADA" Parameter="hORA_ENTRADA" Type="System.TimeSpan" DbType="Time" />
+    <Parameter Name="HORA_SALIDA" Parameter="hORA_SALIDA" Type="System.TimeSpan" DbType="Time" />
+    <Parameter Name="DIA" Parameter="dIA" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ELIMINAR_PROFESOR" Method="ELIMINAR_PROFESOR">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ELIMINAR_MATRICULA" Method="ELIMINAR_MATRICULA">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ELIMINAR_MATERIA_ABIERTA" Method="ELIMINAR_MATERIA_ABIERTA">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ELIMINAR_MATERIA" Method="ELIMINAR_MATERIA">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ELIMINAR_HORARIO" Method="ELIMINAR_HORARIO">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ELIMINAR_DIAS_NO_LECTIVOS" Method="ELIMINAR_DIAS_NO_LECTIVOS">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ELIMINAR_DETALLE" Method="ELIMINAR_DETALLE">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ELIMINAR_CERTIFICADO" Method="ELIMINAR_CERTIFICADO">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ELIMINAR" Method="ELIMINAR">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CORROBORAR_USUARIOS" Method="CORROBORAR_USUARIOS">
+    <Parameter Name="NOMBRE_USER" Parameter="nOMBRE_USER" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="CONTRA" Parameter="cONTRA" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="PERMISO" Parameter="pERMISO" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CORROBORAR_ESTADO" Method="CORROBORAR_ESTADO">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Corroborar_cupo" Method="Corroborar_cupo">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ACTUALIZAR_PROFESORES" Method="ACTUALIZAR_PROFESORES">
+    <Parameter Name="ID" Parameter="iD" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="NOMBRE_P" Parameter="nOMBRE_P" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="APELLIDO1_P" Parameter="aPELLIDO1_P" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="APELLIDO2_P" Parameter="aPELLIDO2_P" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="CORREO_ELECTRONICO_P" Parameter="cORREO_ELECTRONICO_P" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="NUMERO_TELEFONICO_P" Parameter="nUMERO_TELEFONICO_P" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ACTUALIZAR_MATRICULAS" Method="ACTUALIZAR_MATRICULAS">
+    <Parameter Name="ID_MATRICULA" Parameter="iD_MATRICULA" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ID_ESTUDIANTE" Parameter="iD_ESTUDIANTE" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ENCARGADO" Parameter="eNCARGADO" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ACTUALIZAR_MATERIAS_ABIERTAS" Method="ACTUALIZAR_MATERIAS_ABIERTAS">
+    <Parameter Name="COD_MATERIA_ABIERTA" Parameter="cOD_MATERIA_ABIERTA" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="COD_MATERIA" Parameter="cOD_MATERIA" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="IDENTIFICACION_P" Parameter="iDENTIFICACION_P" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="CUPO" Parameter="cUPO" Type="System.Int32" DbType="Int" />
+    <Parameter Name="COSTO" Parameter="cOSTO" Type="System.Int32" DbType="Int" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ACTUALIZAR_MATERIAS" Method="ACTUALIZAR_MATERIAS">
+    <Parameter Name="COD_MATERIA" Parameter="cOD_MATERIA" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="NOMBRE_MATERIA" Parameter="nOMBRE_MATERIA" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="TOTAL_HORAS_MATERIA" Parameter="tOTAL_HORAS_MATERIA" Type="System.Int32" DbType="Int" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ACTUALIZAR_MATERIA_ABIERTA" Method="ACTUALIZAR_MATERIA_ABIERTA">
+    <Parameter Name="COD_MATERIA_ABIERTA" Parameter="cOD_MATERIA_ABIERTA" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="COD_MATERIA" Parameter="cOD_MATERIA" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="IDENTIFICACION_P" Parameter="iDENTIFICACION_P" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="CUPO" Parameter="cUPO" Type="System.Int32" DbType="Int" />
+    <Parameter Name="COSTO" Parameter="cOSTO" Type="System.Int32" DbType="Int" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ACTUALIZAR_ESTUDIANTES" Method="ACTUALIZAR_ESTUDIANTES">
+    <Parameter Name="ID" Parameter="iD" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="NOMBRE_E" Parameter="nOMBRE_E" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="APELLIDO1_E" Parameter="aPELLIDO1_E" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="APELLIDO2_E" Parameter="aPELLIDO2_E" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="CORREO_ELECTRONICO_E" Parameter="cORREO_ELECTRONICO_E" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="NUMERO_TELEFONICO" Parameter="nUMERO_TELEFONICO" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ACTUALIZAR_DETALLE_MATRICULAS" Method="ACTUALIZAR_DETALLE_MATRICULAS">
+    <Parameter Name="ID_DETALLEMATRICULA" Parameter="iD_DETALLEMATRICULA" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ID_MATRICULA" Parameter="iD_MATRICULA" Type="System.Int32" DbType="Int" />
+    <Parameter Name="COD_MATERIA_ABIERTA" Parameter="cOD_MATERIA_ABIERTA" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="NOTA" Parameter="nOTA" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CANCELADO" Parameter="cANCELADO" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="msj" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
